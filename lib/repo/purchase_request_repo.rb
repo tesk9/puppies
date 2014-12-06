@@ -12,14 +12,11 @@ class PurchaseRequestRepo
     deleted_order.breed
   end
 
-  def review
-    @hash.each do |key, value|
-      puts "#{value.customer_name} | #{value.breed}"
-    end
-  end
-
   def get_orders
     @hash
   end
 
+  def update(which, param, value)
+    @hash[which].param = value
+  end
 end

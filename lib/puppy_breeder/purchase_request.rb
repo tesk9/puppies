@@ -20,7 +20,17 @@ module PuppyBreeder
     end
 
     def self.review_orders
-      @@orders.review
+      @@orders.each do |key, value|
+        puts "#{value.customer_name} | #{value.breed}"
+      end
+    end
+
+    def self.review_to_fill
+      @@orders.each do |key, value|
+        if value.hold != true
+          puts "#{value.customer_name} | #{value.breed}"
+        end
+      end
     end
 
     def self.check_for_matches
