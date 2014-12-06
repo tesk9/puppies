@@ -23,7 +23,15 @@ module PuppyBreeder
       @@orders.review
     end
 
-    def self.check_inventory(breed="Siberian Husky")
+    def self.check_for_matches
+      orders = @@orders.get_orders
+      orders.each do |key, value|
+        breed = value.breed
+        return check_inventory(breed)
+      end
+    end 
+
+    def self.check_inventory(breed)
       inv = PuppyBreeder::Puppy.get_inventory
       inv.each do |dog_name, about_dog|
         if about_dog.breed == breed
@@ -35,6 +43,7 @@ module PuppyBreeder
 
     def complete_purchase_request(dog, price, date)
       remove_order(self.customer_name)
+      PuppyBreeder::Puppy.remove_puppy(dog)
       PuppyBreeder::FilledOrders.add_filled_order(self.customer_name, dog, price, date)
     end
 

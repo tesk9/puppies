@@ -41,14 +41,6 @@ describe PuppyBreeder::PurchaseRequest do
   end
 
   describe "#check_inventory" do
-    # it "compares orders against inventory to find breed matches. returns the puppy object when match exists" do
-    #   PuppyBreeder::Puppy.remove_puppies
-    #   PuppyBreeder::Puppy.add_puppy("Balto", "Siberian Husky")
-    #   PuppyBreeder::PurchaseRequest.create_purchase_order("Gunnar", "Siberian Husky")
-    #   dog = PuppyBreeder::PurchaseRequest.check_inventory
-    #   expect(dog.name).to eq("Balto")
-    # end
-
     it "takes in breed and returns puppy object" do
         PuppyBreeder::Puppy.remove_puppies
         PuppyBreeder::Puppy.add_puppy("Balto", "Siberian Husky")
@@ -56,4 +48,16 @@ describe PuppyBreeder::PurchaseRequest do
         expect(dog.name).to eq("Balto")
     end
   end
+
+  describe "#check_for_matches" do
+    it "checks outstanding orders and inventory for matching breeds" do
+        PuppyBreeder::Puppy.remove_puppies
+        PuppyBreeder::Puppy.add_puppy("Balto", "Siberian Husky")
+        PuppyBreeder::PurchaseRequest.create_purchase_order("Gunnar", "Siberian Husky")
+        dog = PuppyBreeder::PurchaseRequest.check_for_matches
+        expect(dog.name).to eq("Balto")
+    end
+  end
+
+
 end

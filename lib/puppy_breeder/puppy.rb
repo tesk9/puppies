@@ -29,5 +29,9 @@ module PuppyBreeder
       @@inventory = PuppyRepo.new
     end
 
+    def self.remove_puppy(name)
+      @@inventory.delete(name)
+    end
+
   end
 end

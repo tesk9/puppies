@@ -18,4 +18,8 @@ class PurchaseRequestRepo
     end
   end
 
+  def get_orders
+    @hash
+  end
+
 end

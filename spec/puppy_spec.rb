@@ -1,6 +1,10 @@
 require_relative 'spec_helper.rb'
 
 describe PuppyBreeder::Puppy do
+  before(:each) do
+    PuppyBreeder::Puppy.remove_puppies
+  end
+
   describe "#add_puppy" do
     it "creates a new puppy of unknown heritage" do
       pup = PuppyBreeder::Puppy.add_puppy("Lassie")
@@ -32,6 +36,14 @@ describe PuppyBreeder::Puppy do
       pup = PuppyBreeder::Puppy.add_puppy("Winn-Dixie")
       inv = PuppyBreeder::Puppy.get_inventory
       expect(inv.length).to be > 0
+    end
+  end
+
+  describe "#remove_puppy" do
+    it "removes one puppy from the inventory" do
+      pup = PuppyBreeder::Puppy.add_puppy("Not Long for this World")
+      pop_pup = PuppyBreeder::Puppy.remove_puppy("Not Long for this World")
+      expect(pop_pup).to eq(pup)
     end
   end
 end

@@ -16,4 +16,8 @@ class PuppyRepo
   def get
     @hash
   end
+
+  def delete(name)
+    @hash.delete(name)
+  end
 end
