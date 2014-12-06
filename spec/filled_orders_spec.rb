@@ -12,5 +12,10 @@ describe PuppyBreeder::FilledOrders do
     end
   end
 
-  describe ("#")
+  describe ("#review_filled_orders") do
+    it "displays filled orders, returns filled orders" do
+      order_review = PuppyBreeder::FilledOrders.review_filled_orders()
+      expect(order_review).to be_a(Hash)
+    end
+  end
 end

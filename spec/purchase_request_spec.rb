@@ -22,9 +22,21 @@ describe PuppyBreeder::PurchaseRequest do
     end
   end
 
+  describe "#remove_order" do
+    it "removes the order by passed-in customer name" do
+      PuppyBreeder::PurchaseRequest.clear_orders
+      order = PuppyBreeder::PurchaseRequest.create_purchase_order("A Person", "A Species")
+      removed_order = order.remove_order("A Person")
+      expect(removed_order).to eq("A Species")
+    end
+  end
+
   describe "#complete_purchase_request" do
     it "pushes filled order to PuppyBreeder::FilledOrders" do
-      
+      PuppyBreeder::PurchaseRequest.clear_orders
+      order = PuppyBreeder::PurchaseRequest.create_purchase_order("A Person", "A Species")
+      complete = order.complete_purchase_request("A Dog", "A Price", "2/1/13")
+      expect(complete).to be_a(PuppyBreeder::FilledOrders)
     end
   end
 end

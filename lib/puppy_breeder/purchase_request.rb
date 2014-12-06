@@ -24,7 +24,13 @@ module PuppyBreeder
       @@orders
     end
 
-    def self.complete_purchase_request
+    def complete_purchase_request(dog, price, date)
+      remove_order(self.customer_name)
+      PuppyBreeder::FilledOrders.add_filled_order(self.customer_name, dog, price, date)
+    end
+
+    def remove_order(customer)
+      @@orders.delete(customer)
     end
   end
 end

@@ -15,7 +15,7 @@ module PuppyBreeder
       @@filled[customer] = FilledOrders.new(customer, puppy, price, date_filled)
     end
 
-    def self.revew_filled_orders
+    def self.review_filled_orders
       puts @@filled
       @@filled 
     end
