@@ -18,7 +18,7 @@ module PuppyBreeder
       if !check_inventory(breed)
         @@orders.update(customer, "hold", true)
       end
-      # @@orders.get_orders
+      order
     end
 
     def self.create_purchase_order(customer, breed)
@@ -63,7 +63,10 @@ module PuppyBreeder
 
     def complete_purchase_request(dog, price, date)
       remove_order(self.customer_name)
+      inventory = PuppyBreeder::Puppy.get_inventory
+      breed = inventory[dog].breed
       PuppyBreeder::Puppy.remove_puppy(dog)
+      price = price || PuppyBreeder::Breed.get_breed(breed)
       PuppyBreeder::FilledOrders.add_filled_order(self.customer_name, dog, price, date)
     end
 
