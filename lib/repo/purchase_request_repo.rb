@@ -16,7 +16,8 @@ class PurchaseRequestRepo
     @hash
   end
 
-  def update(which, param, value)
-    @hash[which].param = value
+  def update(order, field, value)
+    puts @hash[order].hold
+    @hash[order].hold = value
   end
 end

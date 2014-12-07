@@ -3,12 +3,22 @@ module PuppyBreeder
 
   class PurchaseRequest
     attr_reader :breed, :customer_name
+    attr_accessor :hold
 
     @@orders = PurchaseRequestRepo.new
 
     def initialize(customer, breed)
       @customer_name = customer
       @breed = breed
+      @hold = false
+    end
+
+    def self.new_order(customer, breed)
+      order = create_purchase_order(customer, breed)
+      if !check_inventory(breed)
+        @@orders.update(customer, "hold", true)
+      end
+      # @@orders.get_orders
     end
 
     def self.create_purchase_order(customer, breed)
@@ -20,14 +30,14 @@ module PuppyBreeder
     end
 
     def self.review_orders
-      @@orders.each do |key, value|
+      @@orders.get_orders.each do |key, value|
         puts "#{value.customer_name} | #{value.breed}"
       end
     end
 
     def self.review_to_fill
-      @@orders.each do |key, value|
-        if value.hold != true
+      @@orders.get_orders.each do |key, value|
+        if value.hold == false
           puts "#{value.customer_name} | #{value.breed}"
         end
       end
@@ -37,7 +47,7 @@ module PuppyBreeder
       orders = @@orders.get_orders
       orders.each do |key, value|
         breed = value.breed
-        return check_inventory(breed)
+        check_inventory(breed)
       end
     end 
 
