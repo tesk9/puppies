@@ -11,10 +11,12 @@ module PuppyBreeder
   puts "order.complete_purchase_request(dog, price, date) to close out an order"
 end
 
+require_relative 'repo/repo.rb'
 require_relative 'puppy_breeder/puppy.rb'
 require_relative 'puppy_breeder/purchase_request.rb'
 require_relative 'puppy_breeder/breed.rb'
 require_relative 'puppy_breeder/filled_orders.rb'
+
 
 def puppy
   PuppyBreeder::Puppy

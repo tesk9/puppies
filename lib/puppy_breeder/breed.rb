@@ -1,10 +1,8 @@
 module PuppyBreeder
-  require_relative '../repo/breed_repo.rb'
-
   class Breed
     attr_reader :type, :price
 
-    @@breeds = BreedRepo.new
+    @@breeds = Repo::BreedRepo.new
 
     def initialize(type, price)
       @type = type
@@ -20,7 +18,7 @@ module PuppyBreeder
     end
 
     def self.clear_breeds
-      @@breeds = BreedRepo.new
+      @@breeds.clear_breeds
     end
 
   end
