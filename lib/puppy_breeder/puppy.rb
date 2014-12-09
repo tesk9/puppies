@@ -4,7 +4,7 @@ module PuppyBreeder
   class Puppy
     attr_accessor :name, :breed, :mother, :father
 
-    @@inventory = PuppyRepo.new
+    @@inventory = Repo::PuppyRepo.new
 
     def initialize(name, breed, mother, father)
       @name = name
@@ -21,12 +21,8 @@ module PuppyBreeder
       @@inventory.review
     end
 
-    def self.get_inventory
-      @@inventory.get
-    end
-
     def self.remove_puppies
-      @@inventory = PuppyRepo.new
+      @@inventory = Repo::PuppyRepo.new
     end
 
     def self.remove_puppy(name)

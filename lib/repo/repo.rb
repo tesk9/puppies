@@ -8,3 +8,4 @@ module PuppyBreeder::Repo
 end
 
 require_relative 'breed_repo.rb'
+require_relative 'puppy_repo.rb'

@@ -13,14 +13,13 @@ module PuppyBreeder::Repo
     end
 
     def add_breed (breed)
-      # binding.pry
       command = <<-SQL
         INSERT INTO breeds (type, price)
         VALUES ('#{breed.type}', '#{breed.price}')
         RETURNING *;
       SQL
       result = @db.exec(command)
-      return {type: result.values[0][1], price: result.values[0][2]}
+      return {id: result.values[0][0], type: result.values[0][1], price: result.values[0][2]}
     end
 
     def get_breed (type)
@@ -31,12 +30,12 @@ module PuppyBreeder::Repo
       if result.values.length == 0
         return nil
       end
-      return {type: result.values[0][1], price: result.values[0][2]}
+      return {id: result.values[0][0], type: result.values[0][1], price: result.values[0][2]}
     end
 
     def clear_breeds 
       command = <<-SQL 
-        DROP TABLE IF EXISTS breeds;
+        DROP TABLE IF EXISTS breeds CASCADE;
       SQL
       @db.exec(command)
     end
