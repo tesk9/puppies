@@ -33,6 +33,18 @@ module PuppyBreeder::Repo
       return {id: result.values[0][0], type: result.values[0][1], price: result.values[0][2]}
     end
 
+    def get_breed_name (id)
+      command = <<-SQL
+        SELECT * FROM breeds WHERE id='#{id}';
+      SQL
+      result = @db.exec(command)
+      if result.values.length == 0
+        return nil
+      end
+      return result.values[0][1]
+    end
+
+
     def clear_breeds 
       command = <<-SQL 
         DROP TABLE IF EXISTS breeds CASCADE;

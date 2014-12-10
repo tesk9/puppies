@@ -17,6 +17,10 @@ module PuppyBreeder
       @@breeds.get_breed(type)
     end
 
+    def self.get_breed_name(id)
+      @@breeds.get_breed_name(id)
+    end
+
     def self.clear_breeds
       @@breeds.clear_breeds
     end

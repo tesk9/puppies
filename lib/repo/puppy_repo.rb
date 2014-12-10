@@ -37,6 +37,14 @@ module PuppyBreeder::Repo
       results[0]
     end
 
+    def get_puppy (name)
+      command = <<-SQL
+        SELECT * FROM puppies
+        WHERE name='#{name}';
+      SQL
+      @db.exec(command)
+    end
+
     def delete(name)
       command1 = <<-SQL
         SELECT * FROM puppies
